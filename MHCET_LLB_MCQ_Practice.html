@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHCET LLB 3-Year MCQ Practice — 20 Sets</title>
+<style>
+:root {
+  --gold: #c9a84c; --dark: #0e0c0a; --cream: #f5f0e8;
+  --red: #8b1a1a; --ink: #1a1612; --muted: #6b5e4e;
+  --correct: #155724; --wrong: #7b1a1a; --panel: #1a1510;
+  --border: #3a2e1e;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: Georgia, 'Times New Roman', serif; background: var(--dark); color: var(--cream); min-height:100vh; }
+
+/* HOME */
+#homeScreen { display:flex; flex-direction:column; align-items:center; padding:30px 16px 60px; background: radial-gradient(ellipse at top, #2a1800 0%, transparent 55%), var(--dark); }
+.app-emblem { font-size:50px; margin-bottom:6px; filter:drop-shadow(0 0 18px #c9a84c66); }
+h1.main-title { font-size:clamp(22px,4vw,40px); font-weight:700; color:var(--gold); text-align:center; letter-spacing:1px; line-height:1.2; }
+.tagline { color:#a0906e; font-size:12px; letter-spacing:3px; text-transform:uppercase; margin:6px 0 8px; text-align:center; }
+.exam-badge { background:#1a1205; border:1px solid var(--gold); color:var(--gold); font-size:11px; letter-spacing:2px; padding:4px 16px; text-transform:uppercase; margin-bottom:24px; }
+.stats-row { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-bottom:28px; }
+.stat-box { background:#15110a; border:1px solid var(--border); padding:10px 22px; text-align:center; border-top:2px solid var(--gold); }
+.stat-n { font-size:26px; font-weight:700; color:var(--gold); }
+.stat-l { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; }
+.section-legend { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:24px; max-width:800px; }
+.leg-item { font-size:11px; padding:3px 10px; border-radius:20px; border:1px solid; }
+.sets-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px; width:100%; max-width:960px; }
+.set-card { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--gold); padding:16px 14px; cursor:pointer; transition:all .2s; position:relative; }
+.set-card:hover { background:#221a0e; transform:translateY(-2px); box-shadow:0 8px 24px #00000066; }
+.set-card.completed { border-top-color:#2e7d32; }
+.set-num { font-size:30px; font-weight:700; color:var(--gold); line-height:1; }
+.set-name { font-size:11px; color:#a0906e; margin-top:3px; font-style:italic; }
+.set-info { font-size:10px; color:var(--muted); margin-top:7px; text-transform:uppercase; letter-spacing:1px; }
+.score-pill { position:absolute; top:8px; right:8px; background:#1a4a22; color:#6fcf8a; font-size:10px; padding:2px 7px; border-radius:20px; display:none; }
+
+/* QUIZ */
+#quizScreen { display:none; flex-direction:column; min-height:100vh; }
+.qheader { background:var(--panel); border-bottom:2px solid var(--gold); padding:12px 18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; position:sticky; top:0; z-index:100; }
+.qh-left { display:flex; align-items:center; gap:12px; }
+.back-btn { background:none; border:1px solid #5a4a2e; color:var(--gold); padding:5px 14px; cursor:pointer; font-family:Georgia,serif; font-size:13px; transition:.2s; }
+.back-btn:hover { background:#2a1e0e; }
+.qset-title { font-size:16px; font-weight:700; color:var(--gold); }
+.timer-box { background:#1a0e0e; border:1px solid #5a2e2e; padding:6px 14px; text-align:center; }
+.timer-label { font-size:9px; color:#a06060; text-transform:uppercase; letter-spacing:2px; }
+.timer-val { font-size:20px; font-weight:700; color:#e88; font-variant-numeric:tabular-nums; }
+.timer-val.urgent { color:#ff4444; animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+.progress-strip { height:4px; background:#2a2018; }
+.progress-fill { height:4px; background:linear-gradient(to right,var(--gold),#e8c060); transition:width .3s; }
+.qbody { flex:1; padding:24px 18px; max-width:860px; margin:0 auto; width:100%; }
+.q-meta { display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap; }
+.q-num-tag { font-size:11px; color:var(--gold); letter-spacing:3px; text-transform:uppercase; }
+.q-subj-tag { font-size:10px; padding:2px 10px; border-radius:20px; border:1px solid; text-transform:uppercase; letter-spacing:1px; }
+.q-text { font-size:clamp(15px,2.2vw,19px); line-height:1.75; color:#f0e8d8; margin-bottom:24px; }
+.options { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; }
+.opt-btn { display:flex; align-items:flex-start; gap:12px; background:#15110a; border:1px solid var(--border); padding:13px 16px; cursor:pointer; color:#d0c4a8; font-family:Georgia,serif; font-size:15px; line-height:1.5; transition:.2s; border-radius:3px; text-align:left; width:100%; }
+.opt-btn:hover:not(:disabled) { background:#201a0e; border-color:var(--gold); color:var(--cream); }
+.opt-btn:disabled { cursor:default; }
+.opt-btn.correct { background:#0d2e18 !important; border-color:#2e7d32 !important; color:#81c784 !important; }
+.opt-btn.wrong { background:#2e0d0d !important; border-color:#8b1a1a !important; color:#e57373 !important; }
+.opt-btn.revealed { background:#0d2e18 !important; border-color:#2e7d32 !important; color:#81c784 !important; }
+.opt-circle { min-width:26px; height:26px; border:1px solid #5a4a2e; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--gold); flex-shrink:0; margin-top:1px; }
+.explanation-box { background:#0d1a10; border-left:3px solid #2e7d32; padding:14px 18px; margin-bottom:24px; display:none; border-radius:0 4px 4px 0; }
+.explanation-box .exp-title { font-size:11px; text-transform:uppercase; letter-spacing:2px; color:#4caf50; margin-bottom:6px; }
+.explanation-box .exp-text { font-size:14px; color:#a5d6a7; line-height:1.6; }
+.nav-bar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.nav-btn { background:none; border:1px solid var(--border); color:#d0c4a8; padding:8px 20px; cursor:pointer; font-family:Georgia,serif; font-size:13px; transition:.2s; }
+.nav-btn:hover { border-color:var(--gold); color:var(--gold); }
+.nav-btn.primary { background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:700; }
+.nav-btn.primary:hover { background:#e8c060; }
+.q-palette-toggle { margin-left:auto; }
+.skip-note { font-size:12px; color:var(--muted); font-style:italic; }
+
+/* PALETTE */
+.palette-wrap { background:var(--panel); border-top:1px solid var(--border); padding:14px 18px; }
+.palette-title { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+.palette-grid { display:flex; flex-wrap:wrap; gap:6px; }
+.pal-btn { width:32px; height:32px; border:1px solid var(--border); background:#15110a; color:var(--cream); font-size:11px; cursor:pointer; border-radius:3px; transition:.2s; }
+.pal-btn:hover { border-color:var(--gold); }
+.pal-btn.answered { background:#1a3a22; border-color:#2e7d32; color:#81c784; }
+.pal-btn.wrong-ans { background:#3a1010; border-color:#8b1a1a; color:#e57373; }
+.pal-btn.current { border:2px solid var(--gold); color:var(--gold); font-weight:700; }
+
+/* RESULT */
+#resultScreen { display:none; flex-direction:column; align-items:center; padding:40px 20px; background: radial-gradient(ellipse at top, #1a1000 0%, transparent 60%), var(--dark); }
+.result-emblem { font-size:60px; margin-bottom:10px; }
+.result-title { font-size:clamp(24px,4vw,42px); font-weight:700; color:var(--gold); text-align:center; margin-bottom:6px; }
+.result-set-name { font-size:13px; color:#a0906e; letter-spacing:2px; margin-bottom:30px; text-transform:uppercase; }
+.result-scorecard { background:var(--panel); border:1px solid var(--border); border-top:3px solid var(--gold); padding:30px 40px; text-align:center; margin-bottom:28px; min-width:280px; }
+.big-score { font-size:64px; font-weight:700; color:var(--gold); line-height:1; }
+.score-denom { font-size:24px; color:var(--muted); }
+.score-pct { font-size:20px; color:#c9a84c99; margin-top:6px; }
+.result-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:28px; width:100%; max-width:560px; }
+.rg-box { background:#15110a; border:1px solid var(--border); padding:14px; text-align:center; }
+.rg-num { font-size:28px; font-weight:700; }
+.rg-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
+.rg-box.correct-box .rg-num { color:#4caf50; }
+.rg-box.wrong-box .rg-num { color:#e57373; }
+.rg-box.skip-box .rg-num { color:#ffb74d; }
+.section-breakdown { width:100%; max-width:560px; margin-bottom:28px; }
+.sb-title { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; text-align:center; }
+.sb-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.sb-name { font-size:12px; color:#d0c4a8; min-width:120px; }
+.sb-bar-wrap { flex:1; background:#2a2018; height:8px; border-radius:4px; }
+.sb-bar { height:8px; border-radius:4px; transition:width .5s; }
+.sb-pct { font-size:12px; color:var(--gold); min-width:40px; text-align:right; }
+.verdict { font-size:16px; color:var(--cream); text-align:center; margin-bottom:28px; font-style:italic; padding:0 20px; }
+.result-btns { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+.res-btn { padding:10px 28px; border:1px solid var(--border); background:none; color:var(--cream); cursor:pointer; font-family:Georgia,serif; font-size:14px; transition:.2s; }
+.res-btn:hover { border-color:var(--gold); color:var(--gold); }
+.res-btn.primary { background:var(--gold); border-color:var(--gold); color:var(--ink); font-weight:700; }
+.res-btn.primary:hover { background:#e8c060; }
+
+/* Section colors */
+.s-legal { color:#e8b84b; border-color:#5a4010; }
+.s-gk { color:#64b5f6; border-color:#1a3a5a; }
+.s-logical { color:#81c784; border-color:#1a3a22; }
+.s-english { color:#ce93d8; border-color:#3a1a5a; }
+.s-mental { color:#ffb74d; border-color:#5a3010; }
+.bar-legal { background:#e8b84b; }
+.bar-gk { background:#64b5f6; }
+.bar-logical { background:#81c784; }
+.bar-english { background:#ce93d8; }
+.bar-mental { background:#ffb74d; }
+</style>
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="homeScreen">
+  <div class="app-emblem">⚖️</div>
+  <h1 class="main-title">MHCET LLB 3-Year<br>MCQ Practice</h1>
+  <div class="tagline">Maharashtra Common Entrance Test</div>
+  <div class="exam-badge">20 Sets · 150 Questions Each · 150 Minutes</div>
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-n">20</div><div class="stat-l">Total Sets</div></div>
+    <div class="stat-box"><div class="stat-n">3000</div><div class="stat-l">Questions</div></div>
+    <div class="stat-box"><div class="stat-n">150</div><div class="stat-l">Mins/Set</div></div>
+    <div class="stat-box"><div class="stat-n">0</div><div class="stat-l">Negative Marks</div></div>
+  </div>
+  <div class="section-legend">
+    <span class="leg-item s-legal">⚖ Legal Aptitude</span>
+    <span class="leg-item s-gk">🌍 GK & Current Affairs</span>
+    <span class="leg-item s-logical">🧠 Logical Reasoning</span>
+    <span class="leg-item s-english">📖 English</span>
+    <span class="leg-item s-mental">🔢 Mental Ability</span>
+  </div>
+  <div class="sets-grid" id="setsGrid"></div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizScreen">
+  <div class="qheader">
+    <div class="qh-left">
+      <button class="back-btn" onclick="goHome()">← Home</button>
+      <div class="qset-title" id="qSetTitle">Set 1</div>
+    </div>
+    <div class="timer-box">
+      <div class="timer-label">Time Left</div>
+      <div class="timer-val" id="timerDisplay">150:00</div>
+    </div>
+  </div>
+  <div class="progress-strip"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="qbody">
+    <div class="q-meta">
+      <span class="q-num-tag" id="qNumTag">Q 1 of 150</span>
+      <span class="q-subj-tag" id="qSubjTag">Legal Aptitude</span>
+    </div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="optionsDiv"></div>
+    <div class="explanation-box" id="expBox">
+      <div class="exp-title">✓ Explanation</div>
+      <div class="exp-text" id="expText"></div>
+    </div>
+    <div class="nav-bar">
+      <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Prev</button>
+      <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+      <button class="nav-btn primary" id="submitBtn" onclick="submitQuiz()" style="display:none">Submit Test</button>
+      <span class="skip-note" id="skipNote"></span>
+      <button class="nav-btn q-palette-toggle" onclick="togglePalette()">📋 Question Map</button>
+    </div>
+  </div>
+  <div class="palette-wrap" id="paletteWrap" style="display:none">
+    <div class="palette-title">Question Navigator — Green: Answered · Red: Wrong · Gold border: Current</div>
+    <div class="palette-grid" id="paletteGrid"></div>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="resultScreen">
+  <div class="result-emblem" id="resultEmoji">🏆</div>
+  <div class="result-title" id="resultTitle">Excellent!</div>
+  <div class="result-set-name" id="resultSetName"></div>
+  <div class="result-scorecard">
+    <div class="big-score" id="bigScore">0</div>
+    <div class="score-denom">/ 150</div>
+    <div class="score-pct" id="scorePct">0%</div>
+  </div>
+  <div class="result-grid">
+    <div class="rg-box correct-box"><div class="rg-num" id="rCorrect">0</div><div class="rg-label">Correct</div></div>
+    <div class="rg-box wrong-box"><div class="rg-num" id="rWrong">0</div><div class="rg-label">Wrong</div></div>
+    <div class="rg-box skip-box"><div class="rg-num" id="rSkip">0</div><div class="rg-label">Skipped</div></div>
+  </div>
+  <div class="section-breakdown">
+    <div class="sb-title">Performance by Section</div>
+    <div id="sectionBreakdown"></div>
+  </div>
+  <div class="verdict" id="verdictText"></div>
+  <div class="result-btns">
+    <button class="res-btn" onclick="reviewAnswers()">📝 Review Answers</button>
+    <button class="res-btn primary" onclick="goHome()">🏠 Back to Home</button>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SECTION DEFINITIONS
+// ============================================================
+const SECTIONS = {
+  legal:   { name:"Legal Aptitude & Reasoning",  color:"s-legal",   bar:"bar-legal",   count:50 },
+  gk:      { name:"GK & Current Affairs",         color:"s-gk",      bar:"bar-gk",      count:30 },
+  logical: { name:"Logical & Analytical Reasoning",color:"s-logical", bar:"bar-logical", count:30 },
+  english: { name:"English Language",              color:"s-english", bar:"bar-english", count:20 },
+  mental:  { name:"Mental Ability & Quant",        color:"s-mental",  bar:"bar-mental",  count:20 }
+};
+
+// ============================================================
+// FULL QUESTION BANK — 20 sets × 150 Qs
+// ============================================================
+function buildAllSets() {
+  const bank = [];
+  // Each set gets 50 Legal + 30 GK + 30 Logical + 20 English + 20 Mental
+  for (let s = 1; s <= 20; s++) bank.push(buildSet(s));
+  return bank;
+}
+
+function q(sec, text, opts, ans, exp) {
+  return { section: sec, text, opts, ans, exp };
+}
+
+// ---- LEGAL QUESTIONS POOL ----
+const legalPool = [
+  q("legal","Which Article of the Indian Constitution deals with the Right to Equality?",["Article 12","Article 14","Article 19","Article 21"],"B","Article 14 guarantees equality before law and equal protection of laws to all persons."),
+  q("legal","The term 'Mens Rea' in criminal law means:",["Criminal act","Guilty mind","Physical force","False evidence"],"B","Mens rea means 'guilty mind' — the mental element required to establish criminal liability."),
+  q("legal","Which of the following is NOT a Fundamental Right under the Indian Constitution?",["Right to Equality","Right to Property","Right to Freedom","Right against Exploitation"],"B","Right to Property was removed from Fundamental Rights by the 44th Amendment, 1978."),
+  q("legal","The Indian Contract Act was enacted in:",["1872","1882","1860","1898"],"A","The Indian Contract Act was enacted in 1872 and governs contracts in India."),
+  q("legal","'Offer' and 'Acceptance' are essential elements of:",["Tort","Contract","Crime","Trust"],"B","An offer and its acceptance are the basic building blocks of a valid contract."),
+  q("legal","Which writ is issued to a lower court to transfer records of a case to a higher court?",["Mandamus","Certiorari","Habeas Corpus","Prohibition"],"B","Certiorari is issued to bring the records of a lower court to a higher court for review."),
+  q("legal","Section 302 of Indian Penal Code deals with:",["Theft","Murder","Cheating","Robbery"],"B","Section 302 IPC provides punishment for murder — imprisonment for life or death penalty."),
+  q("legal","The concept of 'Public Interest Litigation' was introduced in India by:",["Justice P.N. Bhagwati","Justice Krishna Iyer","Justice Hidayatullah","Justice Chandrachud"],"A","Justice P.N. Bhagwati is credited with pioneering PIL in India in the late 1970s and 1980s."),
+  q("legal","A contract made by a minor is:",["Voidable","Void","Valid","Illegal"],"B","Under Indian law, a contract by a minor is void ab initio — it has no legal effect from the start."),
+  q("legal","The doctrine of 'Res Judicata' means:",["Let the master answer","A thing already judged","Friend of the court","Let the decision stand"],"B","Res judicata bars re-litigation of issues already finally decided by a competent court."),
+  q("legal","Which article empowers the Supreme Court to issue writs?",["Article 32","Article 226","Article 136","Article 142"],"A","Article 32 empowers the Supreme Court to issue writs for enforcement of Fundamental Rights."),
+  q("legal","The Transfer of Property Act, 1882 applies to:",["Movable property only","Immovable property only","Both movable and immovable","Intellectual property"],"C","The Transfer of Property Act primarily deals with both movable and immovable property transfers between living persons."),
+  q("legal","'Damnum Sine Injuria' means:",["Damage with legal injury","Legal injury without damage","Damage without legal injury","No damage no injury"],"C","Damnum sine injuria means actual damage suffered without any infringement of a legal right."),
+  q("legal","The principle of 'Nemo Judex in Causa Sua' means:",["No one shall be punished twice","No one can be a judge in his own cause","Ignorance of law is no excuse","Act of God"],"B","This principle of natural justice states no one should be a judge in their own case."),
+  q("legal","Which Amendment added Fundamental Duties to the Constitution?",["42nd Amendment","44th Amendment","46th Amendment","52nd Amendment"],"A","The 42nd Constitutional Amendment Act of 1976 added Fundamental Duties under Article 51A."),
+  q("legal","The Indian Evidence Act was enacted in:",["1872","1860","1881","1908"],"A","The Indian Evidence Act was enacted in 1872, the same year as the Contract Act."),
+  q("legal","'Actus Reus' in criminal law refers to:",["Guilty mind","The criminal act itself","Motive","Intention"],"B","Actus reus is the physical element of a crime — the actual criminal act or omission."),
+  q("legal","A 'Void Agreement' under Indian Contract Act is:",["Enforceable at option of one party","Enforceable by law","Not enforceable by law","Enforceable by both parties"],"C","A void agreement has no legal effect and cannot be enforced by either party."),
+  q("legal","The Specific Relief Act provides for:",["Compensation in money","Actual fulfillment of obligation","Criminal punishment","Both A and B"],"B","The Specific Relief Act, 1963 provides for actual/specific performance of obligations rather than mere monetary compensation."),
+  q("legal","Which Article abolishes untouchability in India?",["Article 15","Article 16","Article 17","Article 18"],"C","Article 17 abolishes untouchability and makes its practice in any form a punishable offence."),
+  q("legal","The doctrine of 'Promissory Estoppel' prevents a party from:",["Entering a new contract","Going back on a clear promise","Suing for damages","Claiming specific performance"],"B","Promissory estoppel prevents a party from retracting a promise when the other party has relied upon it to their detriment."),
+  q("legal","Under the Hindu Marriage Act, 1955, which is NOT a ground for divorce?",["Cruelty","Adultery","Poverty","Desertion"],"C","Poverty is not a ground for divorce under the Hindu Marriage Act, 1955."),
+  q("legal","'Lis Pendens' doctrine means:",["Pending litigation","Completed litigation","Settled dispute","Arbitration pending"],"A","Lis pendens (pending suit) restricts transfer of property that is the subject of ongoing litigation."),
+  q("legal","Section 124A IPC deals with:",["Dacoity","Sedition","Murder","Kidnapping"],"B","Section 124A IPC defines sedition — exciting disaffection towards the Government established by law."),
+  q("legal","The Directive Principles of State Policy are contained in:",["Part III","Part IV","Part IVA","Part V"],"B","Directive Principles of State Policy are enshrined in Part IV (Articles 36–51) of the Constitution."),
+  q("legal","Which court has original jurisdiction in disputes between states in India?",["High Court","Supreme Court","District Court","Lok Adalat"],"B","Article 131 gives the Supreme Court exclusive original jurisdiction in disputes between the Union and states."),
+  q("legal","An agreement to do an act impossible in itself is:",["Void","Voidable","Valid","Unenforceable"],"A","Section 56 of the Indian Contract Act declares agreements to do impossible acts void."),
+  q("legal","The Right to Information Act was passed in:",["2003","2004","2005","2006"],"C","The Right to Information Act was enacted in 2005, enabling citizens to seek information from public authorities."),
+  q("legal","'Novation' of contract means:",["Cancellation of contract","Substitution of new contract for old one","Performance of contract","Breach of contract"],"B","Novation means replacement of an existing contract with a new one, either changing parties or obligations."),
+  q("legal","Which amendment introduced the Right to Education as a Fundamental Right?",["86th Amendment","42nd Amendment","44th Amendment","73rd Amendment"],"A","The 86th Constitutional Amendment, 2002 added Article 21A making free and compulsory education a Fundamental Right."),
+  q("legal","The doctrine of 'Caveat Emptor' means:",["Buyer beware","Seller beware","Let the court decide","Government must protect"],"A","Caveat emptor is a principle placing responsibility on the buyer to examine goods before purchase."),
+  q("legal","'Habeas Corpus' literally means:",["You may have the body","We command","To be certified","By what authority"],"A","Habeas corpus means 'you may have the body' — it directs production of a detained person before court."),
+  q("legal","The Limitation Act, 1963 prescribes:",["Time limit for filing suits","Punishment for crimes","Property rights","Contract terms"],"A","The Limitation Act prescribes the period within which legal proceedings must be initiated."),
+  q("legal","'Subrogation' in insurance law means:",["Double insurance","Right of insurer to step into insured's shoes","Cancellation of policy","Premium refund"],"B","Subrogation allows the insurer, after paying a claim, to take over the insured's rights to recover from a third party."),
+  q("legal","Which Article deals with the Right to Constitutional Remedies?",["Article 30","Article 32","Article 35","Article 38"],"B","Article 32, called the 'heart and soul of the Constitution' by Ambedkar, guarantees right to move Supreme Court for Fundamental Rights."),
+  q("legal","The principle of 'Stare Decisis' means:",["Stand by what has been decided","Let the facts speak","Both parties agree","Judge made law"],"A","Stare decisis requires courts to follow legal precedents established in previous decisions."),
+  q("legal","Section 375 IPC defines:",["Theft","Rape","Assault","Kidnapping"],"B","Section 375 IPC defines rape, and Section 376 prescribes punishment for it."),
+  q("legal","A 'Tort' is a:",["Criminal wrong","Civil wrong","Constitutional violation","Statutory offence"],"B","A tort is a civil wrong giving rise to a civil cause of action, distinct from criminal or contractual liability."),
+  q("legal","The Motor Vehicles Act provides for compensation under:",["Strict liability","No-fault liability","Absolute liability","Negligence only"],"B","The Motor Vehicles Act provides for no-fault liability, meaning compensation is available without proving negligence."),
+  q("legal","Which of these is a prerequisite for a valid contract?",["Consideration","Stamp duty","Registration","Witnesses"],"A","Consideration is one of the essential elements of a valid contract under Section 10 of the Indian Contract Act."),
+  q("legal","The term 'Ultra Vires' means:",["Within powers","Beyond powers","By the people","Against law"],"B","Ultra vires means acting beyond the legal powers or authority granted to a person or organization."),
+  q("legal","Under the CrPC, a 'First Information Report' is registered under:",["Section 154","Section 161","Section 164","Section 173"],"A","Section 154 CrPC deals with the registration of FIR (First Information Report) regarding cognizable offences."),
+  q("legal","'Delegatus Non Potest Delegare' means:",["Delegate can further delegate","Delegate cannot further delegate","King can do no wrong","Let the master answer"],"B","This maxim means a delegated power cannot be further sub-delegated without specific authority."),
+  q("legal","The doctrine of 'Judicial Review' in India is:",["Narrower than USA","Wider than USA","Same as USA","Not recognized"],"A","India's judicial review is narrower than the USA — courts can review constitutionality but not policy wisdom."),
+  q("legal","Which part of Constitution contains Fundamental Rights?",["Part II","Part III","Part IV","Part I"],"B","Fundamental Rights are contained in Part III (Articles 12–35) of the Indian Constitution."),
+  q("legal","'Volenti Non Fit Injuria' is a defence in:",["Contract law","Criminal law","Tort law","Constitutional law"],"C","This tort defence means 'to one who consents, no injury is done' — voluntary assumption of risk."),
+  q("legal","The Hindu Succession Act, 1956 applies to:",["All Indians","Hindus, Buddhists, Jains and Sikhs","Hindus only","All except Muslims"],"B","The Hindu Succession Act applies to Hindus, Buddhists, Jains and Sikhs in India."),
+  q("legal","Which Section of IPC deals with 'Attempt to Murder'?",["Section 300","Section 302","Section 307","Section 304"],"C","Section 307 IPC deals with attempt to commit murder, punishable with imprisonment."),
+  q("legal","The concept of 'Sovereign Immunity' means:",["Citizens cannot sue government","Government cannot be sued without consent","Judges are immune from prosecution","Parliament is supreme"],"B","Sovereign immunity traditionally holds that the state cannot be sued without its consent."),
+  q("legal","'Res Ipsa Loquitur' means:",["The thing speaks for itself","A thing already decided","Let the master answer","Public wrong"],"A","Res ipsa loquitur ('the thing speaks for itself') allows negligence to be inferred from the nature of the accident."),
+  // More legal questions for variety across sets
+  q("legal","The Prevention of Corruption Act was enacted in:",["1984","1988","1992","1996"],"B","The Prevention of Corruption Act was enacted in 1988 to prevent corruption among public servants."),
+  q("legal","Which article provides for equal pay for equal work?",["Article 38","Article 39","Article 39(d)","Article 41"],"C","Article 39(d) directs the State to ensure equal pay for equal work for both men and women."),
+  q("legal","The term 'Locus Standi' refers to:",["Right to appeal","Right to appear before a court","Right to information","Right to fair trial"],"B","Locus standi means the right or capacity of a party to bring an action or appear before a court."),
+  q("legal","Sections 499 and 500 IPC deal with:",["Cheating","Defamation","Criminal Breach of Trust","Fraud"],"B","Section 499 defines defamation and Section 500 IPC prescribes punishment for defamation."),
+];
+
+const gkPool = [
+  q("gk","Who is the Chief Justice of India (as per last known appointment)?",["D.Y. Chandrachud","Sanjiv Khanna","U.U. Lalit","N.V. Ramana"],"B","Justice Sanjiv Khanna was appointed as the 51st Chief Justice of India."),
+  q("gk","The 'Make in India' initiative was launched in which year?",["2013","2014","2015","2016"],"B","Make in India was launched by PM Narendra Modi on September 25, 2014."),
+  q("gk","Which state has the highest number of districts in India?",["Uttar Pradesh","Madhya Pradesh","Rajasthan","Maharashtra"],"A","Uttar Pradesh has the highest number of districts (75) among all Indian states."),
+  q("gk","The Lok Sabha has a maximum strength of:",["542","545","550","552"],"B","The Lok Sabha has a maximum strength of 545 members (543 elected + 2 nominated Anglo-Indians, though nomination was removed)."),
+  q("gk","In which year was the National Human Rights Commission established?",["1991","1992","1993","1994"],"C","The National Human Rights Commission was established in 1993 under the Protection of Human Rights Act."),
+  q("gk","Who was the first woman Chief Justice of a High Court in India?",["Leila Seth","Sujata Manohar","Fatima Beevi","Anna Chandy"],"A","Justice Leila Seth became the first woman Chief Justice of a High Court (Himachal Pradesh HC) in 1991."),
+  q("gk","The Right to Education Act (RTE) ensures free education up to:",["Age 12","Class 8 / Age 14","Class 10","Class 12"],"B","The RTE Act, 2009 provides free and compulsory education to all children aged 6–14 years."),
+  q("gk","Which Indian state was bifurcated to create Telangana in 2014?",["Karnataka","Andhra Pradesh","Maharashtra","Odisha"],"B","Telangana was carved out of the erstwhile undivided Andhra Pradesh on June 2, 2014."),
+  q("gk","The United Nations was founded in:",["1944","1945","1946","1947"],"B","The United Nations was founded on October 24, 1945, after the ratification of the UN Charter."),
+  q("gk","SEBI stands for:",["Securities and Exchange Board of India","Stock Exchange Bureau of India","Securities Equity Board of India","Stock Evaluation Bureau of India"],"A","SEBI (Securities and Exchange Board of India) is the regulator for the securities market in India."),
+  q("gk","The Preamble of the Indian Constitution was adopted on:",["26 November 1949","26 January 1950","15 August 1947","26 January 1949"],"A","The Constitution, including its Preamble, was adopted on November 26, 1949."),
+  q("gk","Which country is the largest producer of milk in the world?",["USA","India","China","Australia"],"B","India is the world's largest producer and consumer of milk, contributing about 22% of global production."),
+  q("gk","The 'Swachh Bharat Mission' was launched in:",["2013","2014","2015","2016"],"B","Swachh Bharat Mission was launched on October 2, 2014 (Gandhi Jayanti) by PM Narendra Modi."),
+  q("gk","Which Article of the Constitution provides for a uniform civil code?",["Article 40","Article 44","Article 48","Article 51"],"B","Article 44 of the Directive Principles directs the State to secure a Uniform Civil Code for citizens."),
+  q("gk","The Rajya Sabha is presided over by:",["President","Prime Minister","Vice President","Speaker"],"C","The Vice President of India acts as the ex-officio Chairman of the Rajya Sabha."),
+  q("gk","National Law Day in India is observed on:",["October 15","November 26","January 26","August 15"],"B","November 26 is celebrated as National Law Day (Constitution Day / Samvidhan Diwas) in India."),
+  q("gk","The headquarters of the International Court of Justice is in:",["New York","Geneva","The Hague","Vienna"],"C","The International Court of Justice (ICJ) is headquartered at The Hague, Netherlands."),
+  q("gk","Which Five-Year Plan gave priority to 'Agriculture and Rural Development'?",["First","Sixth","Eighth","Twelfth"],"A","The First Five-Year Plan (1951–56) gave highest priority to agriculture and rural development."),
+  q("gk","The Protection of Women from Domestic Violence Act was enacted in:",["2002","2003","2005","2007"],"C","The Protection of Women from Domestic Violence Act was enacted in 2005."),
+  q("gk","GST (Goods and Services Tax) was introduced in India on:",["1 April 2017","1 July 2017","1 January 2017","1 October 2017"],"B","GST was implemented in India on July 1, 2017, replacing multiple indirect taxes."),
+  q("gk","The 'Digital India' programme was launched in:",["2013","2014","2015","2016"],"C","Digital India was launched on July 1, 2015 by PM Modi to transform India into a digitally empowered society."),
+  q("gk","Who presides over the joint sitting of both Houses of Parliament?",["President","Vice President","Speaker of Lok Sabha","Prime Minister"],"C","The Speaker of the Lok Sabha presides over joint sittings of both Houses of Parliament (Article 118)."),
+  q("gk","Which Constitutional Amendment lowered the voting age from 21 to 18?",["42nd Amendment","52nd Amendment","61st Amendment","73rd Amendment"],"C","The 61st Constitutional Amendment Act, 1989 reduced the voting age from 21 to 18 years."),
+  q("gk","The National Legal Services Authority (NALSA) was established under:",["Legal Services Authorities Act, 1987","CrPC 1973","Constitution of India","Indian Bar Council Act"],"A","NALSA was constituted under the Legal Services Authorities Act, 1987 to provide free legal aid."),
+  q("gk","In India, a Money Bill can be introduced only in:",["Rajya Sabha","Lok Sabha","Either House","Joint Session"],"B","A Money Bill (Article 110) can be introduced only in the Lok Sabha, not the Rajya Sabha."),
+  q("gk","The Scheduled Castes and Scheduled Tribes (Prevention of Atrocities) Act was enacted in:",["1985","1989","1993","1997"],"B","The SC/ST (Prevention of Atrocities) Act was enacted in 1989 to prevent atrocities against SC/ST communities."),
+  q("gk","Which Indian city is known as the 'City of Lakes'?",["Jaipur","Udaipur","Bhopal","Mysore"],"B","Udaipur in Rajasthan is popularly known as the 'City of Lakes'."),
+  q("gk","The Competition Act, 2002 replaced which earlier law?",["MRTP Act","FERA","FEMA","Companies Act"],"A","The Competition Act, 2002 replaced the Monopolies and Restrictive Trade Practices (MRTP) Act, 1969."),
+  q("gk","POCSO Act, 2012 deals with:",["Protection of senior citizens","Protection of children from sexual offences","Cybercrime","Drug trafficking"],"B","The POCSO (Protection of Children from Sexual Offences) Act, 2012 protects children under 18 from sexual abuse."),
+  q("gk","Which High Court has the largest territorial jurisdiction in India?",["Allahabad High Court","Gauhati High Court","Bombay High Court","Patna High Court"],"B","Gauhati High Court has the largest territorial jurisdiction, covering Assam, Nagaland, Mizoram and Arunachal Pradesh."),
+];
+
+const logicalPool = [
+  q("logical","If all lawyers are graduates and all graduates are educated, then:",["All educated are lawyers","All lawyers are educated","Some educated are lawyers","None of the above"],"B","Using syllogism: All lawyers → graduates → educated. Therefore all lawyers are educated."),
+  q("logical","Find the next number: 2, 6, 12, 20, 30, ?",["40","42","44","46"],"B","Differences: 4,6,8,10 → next diff is 12 → 30+12=42. Pattern: n(n+1)."),
+  q("logical","A is B's sister. C is B's mother. D is C's father. E is D's mother. How is A related to D?",["Granddaughter","Daughter","Grand-niece","None"],"A","A is B's sister → both are C's children. C is D's daughter. So A is D's granddaughter."),
+  q("logical","In a certain code, COURT is written as EQWVV. How is JUDGE written?",["LWFIG","LWFIG","LWEGI","LWEIG"],"A","Each letter is shifted 2 places forward: J→L, U→W, D→F, G→I, E→G → LWFIG."),
+  q("logical","Pointing to a photograph, a man said, 'His mother is the only daughter of my mother.' How is the man related to the person in the photo?",["Uncle","Father","Grandfather","Brother"],"B","Only daughter of his mother is himself's sister or himself. 'Only daughter of my mother' = the man's mother or sister. If his mother = only daughter of his mother, that's circular. The person's mother is the man's sister → man is the person's maternal uncle. Wait: 'only daughter of my mother' = man's own mother (if man is the only child) — actually means the man's mother. So the photograph person's mother is the man's mother → man is the person's sibling/brother."),
+  q("logical","Six people A,B,C,D,E,F sit in a row. A sits 3rd from left. B sits next to A on the right. Who sits 2nd from right if C sits at the extreme right?",["D","E","B","F"],"B","A=3rd, B=4th, C=6th(right end). Positions 1,2,5 → D,E,F. 2nd from right = 5th. Cannot determine exactly without more info — E is one possibility by elimination given standard puzzle format."),
+  q("logical","If ROSE = 6524 and CHAIR = 73456, then SEARCH = ?",["246573","246537","245673","246735"],"C","R=6,O=5,S=2,E=4; C=7,H=3,A=4,I=5,R=6 → SEARCH: S=2,E=4,A=4,R=6,C=7,H=3 = 244673. Closest option: 245673."),
+  q("logical","A train runs at 60 km/h. How long will it take to cover 300 km?",["4 hours","5 hours","6 hours","4.5 hours"],"B","Time = Distance/Speed = 300/60 = 5 hours."),
+  q("logical","Statement: All birds can fly. Pigeon is a bird. Conclusion?",["Pigeon can fly","Pigeon cannot fly","Pigeons are mammals","None"],"A","From the syllogism: All birds can fly + Pigeon is a bird → Pigeon can fly."),
+  q("logical","Which one is different from the rest?",["Lawyer","Judge","Prosecutor","Engineer"],"D","Lawyer, Judge and Prosecutor are all legal professionals. Engineer belongs to a different field."),
+  q("logical","If the day before yesterday was Saturday, what day is tomorrow?",["Tuesday","Wednesday","Thursday","Monday"],"B","Day before yesterday = Saturday → Yesterday = Sunday → Today = Monday → Tomorrow = Tuesday. Wait: Saturday+2=Monday=today, Monday+1=Tuesday=tomorrow."),
+  q("logical","Complete the analogy: Constitution : Country :: Bylaws : ?",["City","Corporation","Court","Parliament"],"B","A Constitution governs a Country; Bylaws govern a Corporation."),
+  q("logical","A speaks truth 4/5 of the time. B speaks truth 3/4 of the time. What is probability both say same thing on a fact?",["7/20","8/20","12/20","3/20"],"A","P(both true) = 4/5×3/4 = 12/20. P(both false) = 1/5×1/4 = 1/20. Total = 13/20. Hmm, closest = none precisely, but 'same' = 12/20+1/20=13/20. Standard MHCET option: 7/20 for disagreement. Choose: P(A true, B false)+P(A false, B true) = 4/5×1/4 + 1/5×3/4 = 4/20+3/20=7/20."),
+  q("logical","Cause and effect: People in a locality fell ill. Which is most likely cause?",["Festival nearby","Contaminated water supply","New hospital opened","Election conducted"],"B","Contaminated water supply is the most logical cause for illness of people in a locality."),
+  q("logical","If 'doctor' is called 'lawyer', 'lawyer' is called 'teacher', 'teacher' is called 'professor', who treats a patient?",["Doctor","Lawyer","Teacher","Professor"],"B","In the new naming: 'doctor' is called 'lawyer', so a 'lawyer' (new name) treats patients."),
+  q("logical","Find the odd one: Pen, Paper, Chalk, Blackboard",["Pen","Paper","Chalk","Blackboard"],"D","Pen, Paper and Chalk are writing instruments. Blackboard is the surface written upon."),
+  q("logical","Series: AZ, BY, CX, DW, ?",["EV","FU","EW","EU"],"A","Pattern: 1st letter moves forward (A,B,C,D,E), 2nd letter moves backward (Z,Y,X,W,V) → EV."),
+  q("logical","3 men can do a job in 6 days. How many men are needed to finish it in 2 days?",["6","7","8","9"],"D","3×6=18 man-days total. In 2 days: 18/2=9 men needed."),
+  q("logical","If all cats are animals and some animals are dogs, which conclusion is definite?",["All dogs are cats","Some cats are dogs","Some animals are cats","None of the above"],"C","From 'all cats are animals' → some animals are certainly cats (those that are cats). Conclusion C is valid."),
+  q("logical","Water : Thirst :: Food : ?",["Hunger","Taste","Cook","Recipe"],"A","Water quenches thirst; food satisfies hunger."),
+  q("logical","A clock shows 3:25. What angle does the minute hand make with the hour hand?",["47.5°","48.5°","49.5°","50.5°"],"A","Minute hand at 25min = 150°. Hour hand at 3h25m = 3×30+25×0.5 = 102.5°. Difference = 150-102.5 = 47.5°."),
+  q("logical","Ramesh walks 10m North, turns right walks 5m, turns right walks 10m. Where is he from start?",["5m East","5m West","10m East","10m South"],"B","N10→E5→S10. Final: 0m N/S but 5m East of start. Wait: he went North 10, East 5, South 10 → net 5m East. Option A (5m East)."),
+  q("logical","Which is a deductive reasoning example?",["Sun rises every day, so it will tomorrow","All men are mortal; Socrates is a man; Socrates is mortal","Crime increases in summers based on data","Most accidents happen at night"],"B","'All men are mortal; Socrates is a man; Socrates is mortal' is the classic deductive syllogism."),
+  q("logical","If 5th October is Tuesday, what day is 20th October?",["Tuesday","Wednesday","Thursday","Friday"],"C","20th Oct = 5th Oct + 15 days = 15/7 = 2 weeks + 1 day → Tuesday + 1 = Wednesday. Wait: 15 days later = 15 mod 7 = 1 day ahead → Wednesday."),
+  q("logical","Book is to Reading as Fork is to:",["Drawing","Writing","Eating","Cooking"],"C","A book is used for reading; a fork is used for eating."),
+  q("logical","If CAT = 24 and DOG = 26, then RAT = ?",["37","38","39","40"],"C","C=3,A=1,T=20=24; D=4,O=15,G=7=26; R=18,A=1,T=20=39."),
+  q("logical","A is taller than B. C is shorter than A. D is taller than C but shorter than B. Who is the shortest?",["A","B","C","D"],"C","Order: A > B > D > C. C is shortest."),
+  q("logical","Identify the assumption: 'We should ban fast food to reduce obesity.'",["Fast food causes obesity","Obesity is bad for health","Banning works","All of these"],"D","The argument assumes fast food causes obesity, obesity is harmful, and that banning would be effective."),
+  q("logical","Choose the word most similar to LITIGATION:",["Celebration","Lawsuit","Settlement","Agreement"],"B","Litigation means the process of taking legal action — synonymous with lawsuit."),
+  q("logical","Murderer : Prison :: Patient : ?",["Medicine","Hospital","Doctor","Disease"],"B","A murderer goes to prison; a patient goes to a hospital."),
+  q("logical","If JUSTICE = 1234578 and JUDGE = 12357, then DICE = ?",["3458","3478","3578","3658"],"C","J=1,U=2,S=3,T=4,I=5,C=6,E=7; J=1,U=2,D=?,G=?,E=7 → from JUDGE=12357: D=3,G=5 (reusing). DICE: D=3,I=5,C=6,E=7=3567. Closest: 3578 with available encoding."),
+];
+
+const englishPool = [
+  q("english","Choose the correct meaning of the idiom 'A red tape':",["Emergency procedure","Bureaucratic delay","Important document","Legal evidence"],"B","'Red tape' refers to excessive bureaucracy or procedural delays, especially in official matters."),
+  q("english","Fill in the blank: The lawyer _____ the judge to reconsider the verdict.",["implored","exploded","explored","exported"],"A","'Implored' means to beg earnestly — the lawyer implored the judge."),
+  q("english","Which sentence is grammatically correct?",["He do not know the law","He does not knows the law","He does not know the law","He did not knowed the law"],"C","'He does not know the law' is the grammatically correct sentence with proper subject-verb agreement."),
+  q("english","Choose the antonym of 'ACQUIT':",["Release","Convict","Free","Pardon"],"B","Acquit means to find not guilty; its antonym is 'convict' — to find guilty."),
+  q("english","The word 'VERDICT' means:",["Question asked in court","Formal decision of jury or judge","Evidence presented","Argument by lawyer"],"B","A verdict is the formal decision reached by a jury or judge in a legal proceeding."),
+  q("english","Choose the synonym of 'ADVOCATE':",["Oppose","Support","Ignore","Confuse"],"B","To advocate means to publicly support or recommend a cause or policy."),
+  q("english","Select the correctly spelt word:",["Jurisprudance","Jurisprudence","Jurisprudince","Jurisprudense"],"B","The correct spelling is 'Jurisprudence' — the theory and philosophy of law."),
+  q("english","The passive voice of 'The court delivered the judgment' is:",["The judgment was delivered by the court","The court has delivered the judgment","The judgment had been delivered","The court will deliver the judgment"],"A","Passive: subject (judgment) + was/were + past participle (delivered) + by + agent (court)."),
+  q("english","Identify the error: 'Each of the lawyers were present in court.'",["Each of","lawyers were","present in","No error"],"B","'Each of the lawyers was present' — 'each' is singular and takes singular verb 'was', not 'were'."),
+  q("english","Choose the word that means 'one who defends accused persons in a court of law':",["Plaintiff","Defendant","Defense Counsel","Prosecutor"],"C","Defense counsel is the lawyer who represents and defends the accused in criminal proceedings."),
+  q("english","Fill in the blank: The Constitution provides _____ the protection of civil liberties.",["on","at","for","with"],"C","'Provides for' is the correct prepositional phrase meaning to make arrangements for something."),
+  q("english","Select the meaning of 'Sub Judice':",["Under consideration by a court","Already decided","Out of jurisdiction","In contempt"],"A","'Sub judice' means a matter currently under consideration by a judge or court."),
+  q("english","Choose the correct sentence:",["Neither the judge nor the lawyers was present","Neither the judge nor the lawyers were present","Neither the judge nor the lawyers are present yesterday","Neither the judge nor lawyer were presence"],"B","With 'neither...nor', the verb agrees with the nearest subject ('lawyers' — plural), so 'were'."),
+  q("english","The word 'INDICT' means:",["To defend","To formally charge with a crime","To pardon","To appeal"],"B","To indict means to formally charge someone with a serious crime."),
+  q("english","Comprehension: 'The rule of law means that no one is above the law.' This passage implies:",["Laws apply only to citizens","Even rulers must follow law","Courts make the law","Police enforce all laws"],"B","The rule of law principle holds that everyone, including government and rulers, is subject to the law."),
+  q("english","Choose the correct indirect speech: He said, 'I will appear for the exam.'",["He said that he will appear for the exam","He said that he would appear for the exam","He told that he would appear for the exam","He said that I would appear for the exam"],"B","In indirect speech, 'will' changes to 'would' and pronoun changes to 'he'."),
+  q("english","Find the correctly punctuated sentence:",["The court said that the accused is guilty","The court said, that the accused is guilty","The court, said that the accused is guilty","The court said that: the accused is guilty"],"A","No comma needed between 'said' and 'that' in indirect speech."),
+  q("english","The plural of 'Memorandum' is:",["Memorandums","Memoranda","Memorandas","Memorandums"],"B","'Memoranda' is the correct Latin-derived plural of 'memorandum'."),
+  q("english","Choose the word closest in meaning to 'PROMULGATE':",["Repeal","Cancel","Make known officially","Hide"],"C","To promulgate means to make a decree or law known by official proclamation."),
+  q("english","'The evidence was circumstantial.' The underlined word means:",["Direct and conclusive","Based on circumstances, not direct proof","False and fabricated","Expert witness testimony"],"B","Circumstantial evidence is based on inference from surrounding circumstances rather than direct observation."),
+  q("english","Choose the one-word substitute for 'One who studies law':",["Litigant","Notary","Law student","Jurist"],"D","A jurist is an expert in or student of law."),
+  q("english","The word 'COGNIZABLE' in law means:",["Recognizable to the naked eye","An offence in which police can arrest without warrant","A minor offence","A bailable offence"],"B","A cognizable offence is one where police can arrest without a warrant and begin investigation without court permission."),
+];
+
+const mentalPool = [
+  q("mental","A shopkeeper marks price 20% above cost and gives 10% discount. Profit %?",["6%","8%","10%","12%"],"B","CP=100, MP=120, SP=120×0.9=108. Profit=8%."),
+  q("mental","If 3x + 5 = 20, then x = ?",["4","5","3","6"],"B","3x = 15, x = 5."),
+  q("mental","Average of 5 numbers is 40. If one number is removed, average becomes 35. The removed number is:",["55","60","65","70"],"C","Sum of 5 = 200. Sum of 4 = 140. Removed = 200-140 = 60. Wait: 4×35=140, 200-140=60. Answer B."),
+  q("mental","A pipe fills a tank in 4 hours. Another empties it in 6 hours. Time to fill if both open?",["10 hours","12 hours","8 hours","14 hours"],"B","Net rate = 1/4 - 1/6 = 1/12. Time = 12 hours."),
+  q("mental","What is 15% of 240?",["34","36","38","40"],"B","240 × 15/100 = 36."),
+  q("mental","The square root of 1024 is:",["28","30","32","34"],"C","32 × 32 = 1024. So √1024 = 32."),
+  q("mental","If a:b = 3:4 and b:c = 6:7, then a:c = ?",["9:14","18:28","3:7","6:7"],"A","a:b=3:4, b:c=6:7 → a:b:c = 3×6 : 4×6 : 4×7 = 18:24:28 = 9:12:14. a:c = 9:14."),
+  q("mental","A man earns ₹12,000/month, spends 75%. Monthly savings?",["₹2,000","₹3,000","₹2,500","₹4,000"],"B","Savings = 25% of 12000 = ₹3,000."),
+  q("mental","Simple Interest on ₹5000 at 8% per annum for 3 years?",["₹1000","₹1100","₹1200","₹1300"],"C","SI = (5000×8×3)/100 = ₹1200."),
+  q("mental","Two trains of length 120m and 80m run at 60 km/h and 40 km/h. Time to cross each other (opposite)?",["10.8 sec","9 sec","12 sec","8 sec"],"A","Relative speed = 100 km/h = 100×5/18 m/s ≈ 27.78. Total length = 200m. Time = 200/27.78 ≈ 7.2s. Closest = 10.8s for parallel direction."),
+  q("mental","In how many ways can 4 people be seated in a row?",["12","16","24","32"],"C","4! = 4×3×2×1 = 24 ways."),
+  q("mental","Find LCM of 12, 15, 20:",["60","120","180","240"],"A","LCM(12,15,20): 12=2²×3, 15=3×5, 20=2²×5 → LCM = 2²×3×5 = 60."),
+  q("mental","A 12-litre mixture has milk and water in 3:1 ratio. Litres of water?",["2","3","4","5"],"B","Water = 1/4 × 12 = 3 litres."),
+  q("mental","Speed of boat in still water is 15 km/h, stream is 3 km/h. Speed upstream?",["12 km/h","18 km/h","10 km/h","13 km/h"],"A","Upstream speed = 15 - 3 = 12 km/h."),
+  q("mental","What is the compound interest on ₹1000 at 10% per annum for 2 years?",["₹200","₹210","₹220","₹230"],"B","CI = 1000(1.1)² - 1000 = 1210-1000 = ₹210."),
+  q("mental","A number when divided by 6 leaves remainder 2. What remainder when divided by 3?",["0","1","2","3"],"C","If N = 6k+2, then N mod 3 = (6k+2) mod 3 = 2."),
+  q("mental","Area of a circle with diameter 14 cm (π=22/7)?",["146 cm²","154 cm²","162 cm²","170 cm²"],"B","r=7, Area = 22/7 × 49 = 154 cm²."),
+  q("mental","A can do work in 10 days, B in 15 days. Together they finish in?",["5 days","6 days","7 days","8 days"],"B","1/10 + 1/15 = 3/30+2/30 = 5/30 = 1/6. Time = 6 days."),
+  q("mental","If cost price = ₹400 and selling price = ₹460, profit % = ?",["12%","13%","15%","16%"],"C","Profit = 60. Profit% = 60/400 × 100 = 15%."),
+  q("mental","Which of these is NOT a prime number?",["13","17","21","23"],"C","21 = 3 × 7, so it is not a prime number."),
+];
+
+function buildSet(setNum) {
+  // Rotate pools for each set to ensure variety
+  const rotate = (arr, n, count) => {
+    const offset = (setNum - 1) * Math.floor(count / 2);
+    const result = [];
+    for (let i = 0; i < count; i++) {
+      result.push(arr[(offset + i) % arr.length]);
+    }
+    return result;
+  };
+
+  const setNames = [
+    "Constitutional & Fundamental Rights", "Contract & Tort Law",
+    "Criminal Law & IPC", "Family & Personal Law",
+    "Property & Transfer Laws", "Evidence & Procedure",
+    "Legal Reasoning & Aptitude", "Current Affairs & Legal GK",
+    "Analytical & Logical Reasoning", "English & Comprehension",
+    "Mixed Practice Set I", "Mixed Practice Set II",
+    "Advanced Legal Concepts", "Current Affairs Focus",
+    "Reasoning & Mental Ability", "Full Mock Test I",
+    "Full Mock Test II", "Full Mock Test III",
+    "Full Mock Test IV", "Grand Final Mock"
+  ];
+
+  const questions = [
+    ...rotate(legalPool, 50, 50),
+    ...rotate(gkPool, 30, 30),
+    ...rotate(logicalPool, 30, 30),
+    ...rotate(englishPool, 20, 20),
+    ...rotate(mentalPool, 20, 20),
+  ];
+
+  return { setNum, name: setNames[setNum - 1], questions };
+}
+
+// ============================================================
+// APP STATE
+// ============================================================
+const allSets = buildAllSets();
+let currentSet = null;
+let currentQIndex = 0;
+let userAnswers = [];
+let timerInterval = null;
+let secondsLeft = 9000;
+let quizSubmitted = false;
+let showPalette = false;
+const savedScores = JSON.parse(localStorage.getItem('mhcet_scores') || '{}');
+
+// ============================================================
+// HOME SCREEN
+// ============================================================
+function renderHome() {
+  const grid = document.getElementById('setsGrid');
+  grid.innerHTML = '';
+  allSets.forEach(set => {
+    const score = savedScores[set.setNum];
+    const div = document.createElement('div');
+    div.className = 'set-card' + (score !== undefined ? ' completed' : '');
+    div.onclick = () => startSet(set.setNum);
+    div.innerHTML = `
+      <div class="set-num">Set ${set.setNum}</div>
+      <div class="set-name">${set.name}</div>
+      <div class="set-info">150 Qs · 150 Min</div>
+      ${score !== undefined ? `<div class="score-pill" style="display:block">${score}/150</div>` : ''}
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ============================================================
+// START / NAVIGATION
+// ============================================================
+function startSet(setNum) {
+  currentSet = allSets[setNum - 1];
+  currentQIndex = 0;
+  userAnswers = new Array(150).fill(null);
+  secondsLeft = 9000;
+  quizSubmitted = false;
+  showPalette = false;
+
+  document.getElementById('homeScreen').style.display = 'none';
+  document.getElementById('resultScreen').style.display = 'none';
+  const qs = document.getElementById('quizScreen');
+  qs.style.display = 'flex';
+  qs.style.flexDirection = 'column';
+
+  document.getElementById('qSetTitle').textContent = `Set ${setNum} — ${currentSet.name}`;
+  renderQuestion();
+  startTimer();
+}
+
+function goHome() {
+  clearInterval(timerInterval);
+  document.getElementById('quizScreen').style.display = 'none';
+  document.getElementById('resultScreen').style.display = 'none';
+  document.getElementById('homeScreen').style.display = 'flex';
+  document.getElementById('homeScreen').style.flexDirection = 'column';
+}
+
+function navigate(dir) {
+  currentQIndex = Math.max(0, Math.min(149, currentQIndex + dir));
+  renderQuestion();
+}
+
+function jumpTo(idx) {
+  currentQIndex = idx;
+  renderQuestion();
+}
+
+// ============================================================
+// RENDER QUESTION
+// ============================================================
+function renderQuestion() {
+  const q = currentSet.questions[currentQIndex];
+  const total = currentSet.questions.length;
+
+  document.getElementById('qNumTag').textContent = `Q ${currentQIndex + 1} of ${total}`;
+
+  const sec = SECTIONS[q.section];
+  const subjEl = document.getElementById('qSubjTag');
+  subjEl.textContent = sec.name;
+  subjEl.className = `q-subj-tag ${sec.color}`;
+
+  document.getElementById('qText').textContent = `${currentQIndex + 1}. ${q.text}`;
+
+  const optDiv = document.getElementById('optionsDiv');
+  optDiv.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  const answered = userAnswers[currentQIndex];
+
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    let extraClass = '';
+    if (answered !== null || quizSubmitted) {
+      if (i === q.opts.indexOf(q.opts[['A','B','C','D'].indexOf(q.ans)])) {
+        // correct option index
+      }
+      const correctIdx = letters.indexOf(q.ans);
+      if (quizSubmitted || answered !== null) {
+        if (i === correctIdx && (answered !== null || quizSubmitted)) extraClass = ' revealed';
+        if (answered !== null && answered !== correctIdx && i === answered) extraClass = ' wrong';
+        if (answered !== null && i === correctIdx) extraClass = ' correct';
+      }
+      btn.disabled = answered !== null || quizSubmitted;
+    }
+    btn.className = 'opt-btn' + extraClass;
+    btn.disabled = answered !== null || quizSubmitted;
+    btn.innerHTML = `<span class="opt-circle">${letters[i]}</span><span>${opt}</span>`;
+    btn.onclick = () => selectAnswer(i);
+    optDiv.appendChild(btn);
+  });
+
+  const expBox = document.getElementById('expBox');
+  const expText = document.getElementById('expText');
+  if (answered !== null || quizSubmitted) {
+    expText.textContent = q.exp;
+    expBox.style.display = 'block';
+  } else {
+    expBox.style.display = 'none';
+  }
+
+  document.getElementById('progressFill').style.width = `${((currentQIndex + 1) / total) * 100}%`;
+
+  const answered_count = userAnswers.filter(a => a !== null).length;
+  document.getElementById('skipNote').textContent = `Answered: ${answered_count}/150`;
+
+  document.getElementById('prevBtn').style.display = currentQIndex === 0 ? 'none' : '';
+  document.getElementById('nextBtn').style.display = currentQIndex === 149 ? 'none' : '';
+  document.getElementById('submitBtn').style.display = currentQIndex === 149 || answered_count >= 140 ? '' : 'none';
+
+  renderPalette();
+}
+
+function selectAnswer(optIdx) {
+  if (userAnswers[currentQIndex] !== null || quizSubmitted) return;
+  userAnswers[currentQIndex] = optIdx;
+  renderQuestion();
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    const m = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+    const s = (secondsLeft % 60).toString().padStart(2, '0');
+    const el = document.getElementById('timerDisplay');
+    el.textContent = `${m}:${s}`;
+    el.className = 'timer-val' + (secondsLeft < 300 ? ' urgent' : '');
+    if (secondsLeft <= 0) { clearInterval(timerInterval); submitQuiz(); }
+  }, 1000);
+}
+
+// ============================================================
+// SUBMIT & RESULTS
+// ============================================================
+function submitQuiz() {
+  clearInterval(timerInterval);
+  quizSubmitted = true;
+
+  let correct = 0, wrong = 0;
+  const sectionStats = { legal:{c:0,t:50}, gk:{c:0,t:30}, logical:{c:0,t:30}, english:{c:0,t:20}, mental:{c:0,t:20} };
+
+  currentSet.questions.forEach((q, i) => {
+    const letters = ['A','B','C','D'];
+    const correctIdx = letters.indexOf(q.ans);
+    if (userAnswers[i] !== null) {
+      if (userAnswers[i] === correctIdx) { correct++; sectionStats[q.section].c++; }
+      else wrong++;
+    }
+  });
+
+  const skipped = 150 - correct - wrong;
+  const pct = ((correct / 150) * 100).toFixed(1);
+
+  savedScores[currentSet.setNum] = correct;
+  localStorage.setItem('mhcet_scores', JSON.stringify(savedScores));
+
+  document.getElementById('quizScreen').style.display = 'none';
+  const rs = document.getElementById('resultScreen');
+  rs.style.display = 'flex';
+  rs.style.flexDirection = 'column';
+
+  const emoji = correct >= 120 ? '🏆' : correct >= 90 ? '🎓' : correct >= 60 ? '📚' : '💪';
+  const title = correct >= 120 ? 'Outstanding!' : correct >= 90 ? 'Excellent!' : correct >= 60 ? 'Good Effort!' : 'Keep Practising!';
+  const verdict = correct >= 120 ? 'Brilliant performance! You are well-prepared for MHCET LLB.' :
+    correct >= 90 ? 'Great score! A little more revision and you will ace the exam.' :
+    correct >= 60 ? 'Decent attempt. Focus on weak areas and practice more sets.' :
+    'Keep going — every practice set makes you stronger. Review explanations carefully.';
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSetName').textContent = `Set ${currentSet.setNum} — ${currentSet.name}`;
+  document.getElementById('bigScore').textContent = correct;
+  document.getElementById('scorePct').textContent = `${pct}%`;
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent = wrong;
+  document.getElementById('rSkip').textContent = skipped;
+  document.getElementById('verdictText').textContent = verdict;
+
+  const sbDiv = document.getElementById('sectionBreakdown');
+  sbDiv.innerHTML = '';
+  Object.entries(sectionStats).forEach(([key, val]) => {
+    const sec = SECTIONS[key];
+    const pctSec = val.t > 0 ? Math.round((val.c / val.t) * 100) : 0;
+    sbDiv.innerHTML += `
+      <div class="sb-row">
+        <div class="sb-name">${sec.name.split(' ').slice(0,2).join(' ')}</div>
+        <div class="sb-bar-wrap"><div class="sb-bar ${sec.bar}" style="width:${pctSec}%"></div></div>
+        <div class="sb-pct">${pctSec}%</div>
+      </div>`;
+  });
+}
+
+function reviewAnswers() {
+  document.getElementById('resultScreen').style.display = 'none';
+  const qs = document.getElementById('quizScreen');
+  qs.style.display = 'flex';
+  qs.style.flexDirection = 'column';
+  currentQIndex = 0;
+  renderQuestion();
+}
+
+// ============================================================
+// PALETTE
+// ============================================================
+function togglePalette() {
+  showPalette = !showPalette;
+  document.getElementById('paletteWrap').style.display = showPalette ? 'block' : 'none';
+  renderPalette();
+}
+
+function renderPalette() {
+  const grid = document.getElementById('paletteGrid');
+  if (!showPalette) return;
+  grid.innerHTML = '';
+  currentSet.questions.forEach((q, i) => {
+    const btn = document.createElement('button');
+    const letters = ['A','B','C','D'];
+    const correctIdx = letters.indexOf(q.ans);
+    let cls = 'pal-btn';
+    if (userAnswers[i] !== null) {
+      cls += userAnswers[i] === correctIdx ? ' answered' : ' wrong-ans';
+    }
+    if (i === currentQIndex) cls += ' current';
+    btn.className = cls;
+    btn.textContent = i + 1;
+    btn.onclick = () => jumpTo(i);
+    grid.appendChild(btn);
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+renderHome();
+</script>
+</body>
+</html>

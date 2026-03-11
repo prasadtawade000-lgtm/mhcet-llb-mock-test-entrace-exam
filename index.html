@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MHCET LLB Mock Test University — Prof. Prasad Tawade | LLB MHCET Pune</title>
+<meta name="description" content="LLB Mock Test Bundle by Prof. Prasad Tawade, Pune. MHCET preparation. Only ₹100.">
+
+<!-- Anti copy/screenshot CSS -->
+<style>
+  /* Disable selection globally in protected areas */
+  .protected {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+</style>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+:root {
+  --gold: #c9a84c;
+  --gold2: #e8c870;
+  --dark: #080705;
+  --dark2: #100e09;
+  --panel: #161209;
+  --cream: #f2ead8;
+  --muted: #7a6a50;
+  --border: #2e2416;
+  --red: #8b1a1a;
+  --green: #1a5c2e;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  background: var(--dark);
+  color: var(--cream);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ========== ANTI-COPY PROTECTION ========== */
+body { -webkit-user-select: none; user-select: none; }
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--dark2); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ========== NAV ========== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(8,7,5,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  backdrop-filter: blur(10px);
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 12px;
+}
+
+.nav-logo {
+  font-size: 28px;
+  filter: drop-shadow(0 0 8px #c9a84c66);
+}
+
+.nav-title {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 1px;
+  line-height: 1.2;
+}
+
+.nav-title span {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  font-family: 'Crimson Pro', serif;
+  font-weight: 300;
+}
+
+.nav-links {
+  display: flex; gap: 6px; align-items: center;
+}
+
+.nav-links a {
+  color: #a09070;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 2px;
+  transition: .2s;
+  letter-spacing: 1px;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.nav-btn {
+  background: var(--gold);
+  color: var(--dark) !important;
+  font-weight: 600 !important;
+  padding: 7px 18px !important;
+  border-radius: 2px;
+}
+
+.nav-btn:hover { background: var(--gold2) !important; }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--gold); border-radius: 2px; transition: .3s;
+}
+
+/* ========== HERO ========== */
+#home {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 100px 20px 60px;
+  position: relative;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #2a1a00 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, #1a0e00 0%, transparent 60%),
+    var(--dark);
+  overflow: hidden;
+}
+
+#home::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 60px, #c9a84c08 60px, #c9a84c08 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, #c9a84c08 60px, #c9a84c08 61px);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 4px;
+  padding: 5px 20px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  animation: fadeDown .8s ease both;
+}
+
+h1.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(32px, 6vw, 72px);
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1.1;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  animation: fadeDown .9s ease .1s both;
+  text-shadow: 0 4px 40px #c9a84c44;
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: #c0a870;
+  margin-bottom: 20px;
+  font-style: italic;
+  animation: fadeDown .9s ease .2s both;
+}
+
+.hero-desc {
+  font-size: clamp(14px, 2vw, 17px);
+  color: #907a58;
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+  animation: fadeDown .9s ease .3s both;
+}
+
+.hero-price-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: #1a1205;
+  border: 1px solid var(--gold);
+  padding: 16px 32px;
+  margin-bottom: 36px;
+  animation: fadeDown .9s ease .4s both;
+}
+
+.price-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+.price-amount { font-family: 'Cinzel', serif; font-size: 42px; color: var(--gold); font-weight: 900; line-height: 1; }
+.price-note { font-size: 12px; color: #806040; font-style: italic; }
+
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+  animation: fadeDown .9s ease .5s both;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  padding: 14px 36px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .25s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px #c9a84c33; }
+
+.btn-outline {
+  background: none;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 13px 36px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .25s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline:hover { background: #1a1205; transform: translateY(-2px); }
+
+.scroll-indicator {
+  position: absolute; bottom: 30px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: bounce 2s infinite;
+  color: var(--muted); font-size: 11px; letter-spacing: 2px;
+}
+
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ========== SECTIONS COMMON ========== */
+section {
+  padding: 80px 20px;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(24px, 4vw, 40px);
+  color: var(--cream);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.section-line {
+  width: 60px; height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin-bottom: 40px;
+}
+
+/* ========== ABOUT ========== */
+#about {
+  background: radial-gradient(ellipse at left, #1a1000 0%, transparent 60%), var(--dark2);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-photo-wrap {
+  position: relative;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #1a1205, #2a1e0e);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  font-style: italic;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo::after {
+  content: '⚖️';
+  font-size: 60px;
+  opacity: .3;
+}
+
+.about-photo-corner {
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 40px; height: 40px;
+  border-top: 1px solid var(--gold);
+  border-left: 1px solid var(--gold);
+}
+
+.about-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(22px, 3vw, 32px);
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.about-designation {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-text {
+  font-size: 16px;
+  line-height: 1.9;
+  color: #b8a888;
+  margin-bottom: 24px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.astat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+  padding: 16px;
+  text-align: center;
+}
+
+.astat-num {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.astat-label {
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ========== SERVICES ========== */
+#services {
+  background: var(--dark);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 28px 24px;
+  transition: .3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at top right, #c9a84c0a, transparent 60%);
+  pointer-events: none;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px #00000088;
+  border-top-color: var(--gold2);
+}
+
+.service-icon { font-size: 36px; margin-bottom: 16px; }
+.service-title {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.service-desc { font-size: 14px; color: #907a58; line-height: 1.7; margin-bottom: 14px; }
+.service-price {
+  display: inline-block;
+  background: #1a1205;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  padding: 4px 16px;
+}
+
+/* ========== GALLERY ========== */
+#gallery {
+  background: var(--dark2);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.gallery-item {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1a1205, #252015);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.gallery-item:hover { border-color: var(--gold); transform: scale(1.02); }
+
+.gallery-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, #000000cc, transparent);
+  padding: 20px 12px 10px;
+  font-size: 12px;
+  color: var(--cream);
+  letter-spacing: 1px;
+}
+
+/* ========== PAYMENT ========== */
+#payment {
+  background: radial-gradient(ellipse at center, #1a1000 0%, transparent 70%), var(--dark);
+}
+
+.payment-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.payment-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 40px 36px;
+  margin-bottom: 24px;
+}
+
+.pay-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+
+.pay-sub { font-size: 14px; color: var(--muted); margin-bottom: 30px; }
+
+.pay-amount-box {
+  background: #0e0b05;
+  border: 2px solid var(--gold);
+  display: inline-block;
+  padding: 16px 48px;
+  margin-bottom: 30px;
+}
+
+.pay-rupee { font-family: 'Cinzel', serif; font-size: 52px; color: var(--gold); font-weight: 900; line-height: 1; }
+.pay-rupee-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 4px; }
+
+.pay-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.pay-method {
+  background: #0e0b05;
+  border: 1px solid var(--border);
+  padding: 16px;
+  border-radius: 2px;
+}
+
+.pm-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.pm-value { font-size: 15px; color: var(--cream); font-weight: 600; word-break: break-all; }
+.pm-icon { font-size: 22px; margin-bottom: 8px; }
+
+.pay-steps {
+  text-align: left;
+  background: #0e0b05;
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.pay-steps-title {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.pay-step {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.step-num {
+  min-width: 26px; height: 26px;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.step-text { font-size: 14px; color: #b0a080; line-height: 1.6; }
+
+.pay-notice {
+  background: #1a0e0e;
+  border: 1px solid #5a2a2a;
+  border-left: 3px solid #e57373;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: #e57373;
+  text-align: left;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ========== LOGIN ========== */
+#login {
+  background: var(--dark2);
+}
+
+.login-wrap {
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.login-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 40px 36px;
+}
+
+.login-title {
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.login-sub {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 30px;
+  font-style: italic;
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 7px;
+}
+
+.form-input {
+  width: 100%;
+  background: #0e0b05;
+  border: 1px solid var(--border);
+  color: var(--cream);
+  padding: 12px 16px;
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px;
+  outline: none;
+  transition: .2s;
+}
+
+.form-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px #c9a84c22;
+}
+
+.form-input::placeholder { color: #5a4a30; }
+
+.login-btn {
+  width: 100%;
+  background: var(--gold);
+  border: none;
+  color: var(--dark);
+  padding: 14px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: .2s;
+  margin-top: 6px;
+}
+
+.login-btn:hover { background: var(--gold2); }
+
+.login-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 16px;
+  font-style: italic;
+}
+
+.login-error {
+  background: #2e0d0d;
+  border: 1px solid var(--red);
+  color: #e57373;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+  text-align: center;
+}
+
+.login-success {
+  background: #0d2e18;
+  border: 1px solid #2e7d32;
+  color: #81c784;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+  text-align: center;
+}
+
+/* ========== CONTACT ========== */
+#contact {
+  background: var(--dark);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+}
+
+.contact-info-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.ci-icon {
+  font-size: 24px;
+  min-width: 40px; height: 40px;
+  background: #1a1205;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.ci-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 4px; }
+.ci-value { font-size: 15px; color: var(--cream); }
+.ci-value a { color: var(--gold); text-decoration: none; }
+
+.contact-form-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 32px 28px;
+}
+
+.cf-title {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+
+.contact-btn {
+  background: var(--gold);
+  border: none;
+  color: var(--dark);
+  padding: 12px 32px;
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: .2s;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.contact-btn:hover { background: var(--gold2); }
+
+.form-success {
+  background: #0d2e18;
+  border: 1px solid #2e7d32;
+  color: #81c784;
+  padding: 12px;
+  font-size: 13px;
+  text-align: center;
+  display: none;
+  margin-top: 12px;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: #050403;
+  border-top: 1px solid var(--border);
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.footer-text { font-size: 13px; color: var(--muted); line-height: 1.7; }
+.footer-copy { font-size: 11px; color: #3a3020; margin-top: 16px; letter-spacing: 2px; }
+
+/* ========== MOBILE NAV ========== */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(8,7,5,.98);
+  border-bottom: 1px solid var(--border);
+  padding: 20px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 999;
+}
+
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: #a09070;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #1a1408;
+  transition: .2s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+
+/* ========== PROTECTED CONTENT OVERLAY ========== */
+#protectedContent {
+  display: none;
+}
+
+.lock-overlay {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.lock-icon { font-size: 48px; margin-bottom: 16px; }
+.lock-title { font-family:'Cinzel',serif; font-size:22px; color:var(--gold); margin-bottom:10px; }
+.lock-text { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:24px; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .about-grid { grid-template-columns: 1fr; gap: 30px; }
+  .about-photo { aspect-ratio: 4/3; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+  .pay-methods { grid-template-columns: 1fr; }
+  nav { padding: 0 16px; }
+  .login-card, .payment-card { padding: 24px 20px; }
+}
+
+@media (max-width: 480px) {
+  .about-stats { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav>
+  <div class="nav-brand">
+    <span class="nav-logo">⚖️</span>
+    <div class="nav-title">
+      MHCET LLB MOCK TEST UNIVERSITY
+      <span>Prof. Prasad Tawade · Pune</span>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#payment">Buy Now</a>
+    <a href="#contact">Contact</a>
+    <a href="#login" class="nav-btn">Login</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">🏠 Home</a>
+  <a href="#about" onclick="toggleMenu()">👨‍🏫 About</a>
+  <a href="#services" onclick="toggleMenu()">📚 Services</a>
+  <a href="#gallery" onclick="toggleMenu()">🖼️ Gallery</a>
+  <a href="#payment" onclick="toggleMenu()">💳 Buy Now</a>
+  <a href="#contact" onclick="toggleMenu()">📞 Contact</a>
+  <a href="#login" onclick="toggleMenu()">🔐 Login</a>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="home">
+  <div class="hero-badge">⚖ Maharashtra's Premier LLB Practice Platform</div>
+  <h1 class="hero-title">MHCET LLB<br>MOCK TEST UNIVERSITY</h1>
+  <div class="hero-sub">by Prof. Prasad Tawade, Pune</div>
+  <p class="hero-desc">
+    Crack MHCET LLB 3-Year with confidence. Get access to premium mock test bundles
+    crafted by an experienced law faculty — covering all sections of the exam.
+  </p>
+  <div class="hero-price-box">
+    <div>
+      <div class="price-label">Complete Bundle</div>
+      <div class="price-amount">₹100</div>
+      <div class="price-note">One-time payment · Instant access</div>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a href="#payment" class="btn-primary">Buy Now — ₹100</a>
+    <a href="#services" class="btn-outline">View Contents</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>SCROLL</span>
+    <span>↓</span>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-label">About the Faculty</span>
+    <h2 class="section-title">Prof. Prasad Tawade</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo">
+          <span style="font-size:14px;color:#5a4a30;">📸 Profile Photo</span>
+          <div class="about-photo-corner"></div>
+        </div>
+      </div>
+      <div>
+        <div class="about-name">Prof. Prasad Tawade</div>
+        <div class="about-designation">Law Faculty · MHCET LLB Expert · Pune</div>
+        <p class="about-text">
+          Prof. Prasad Tawade is a dedicated law educator based in Pune, Maharashtra, with years of
+          experience in preparing students for the MHCET LLB 3-Year entrance examination. His
+          expertly crafted mock test bundles cover every section of the exam — Legal Aptitude,
+          GK & Current Affairs, Logical Reasoning, English, and Mental Ability.
+        </p>
+        <p class="about-text">
+          His teaching methodology focuses on exam-pattern based practice, concept clarity, and
+          time management — enabling students to achieve their dream of studying law at top
+          Maharashtra universities.
+        </p>
+        <div class="about-stats">
+          <div class="astat">
+            <div class="astat-num">20</div>
+            <div class="astat-label">Mock Sets</div>
+          </div>
+          <div class="astat">
+            <div class="astat-num">3000</div>
+            <div class="astat-label">Questions</div>
+          </div>
+          <div class="astat">
+            <div class="astat-num">₹100</div>
+            <div class="astat-label">Only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-label">What You Get</span>
+    <h2 class="section-title">LLB Mock Test Bundle</h2>
+    <div class="section-line"></div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <div class="service-title">20 Full Mock Tests</div>
+        <div class="service-desc">20 complete sets of 150 questions each, exactly as per MHCET LLB 3-Year exam pattern. 150 minutes per set.</div>
+        <span class="service-price">3000 Questions</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚖️</div>
+        <div class="service-title">Legal Aptitude</div>
+        <div class="service-desc">50 questions per set covering Constitutional Law, Contract, Tort, IPC, Evidence, Family Law, Property Law and more.</div>
+        <span class="service-price">50 Qs / Set</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🌍</div>
+        <div class="service-title">GK & Current Affairs</div>
+        <div class="service-desc">30 questions per set on national & international GK, legal news, government schemes, important acts & amendments.</div>
+        <span class="service-price">30 Qs / Set</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <div class="service-title">Logical Reasoning</div>
+        <div class="service-desc">30 questions per set on analytical reasoning, syllogisms, series, coding-decoding, blood relations, directions.</div>
+        <span class="service-price">30 Qs / Set</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📖</div>
+        <div class="service-title">English Language</div>
+        <div class="service-desc">20 questions per set on grammar, vocabulary, idioms, comprehension passages, sentence correction and legal terms.</div>
+        <span class="service-price">20 Qs / Set</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔢</div>
+        <div class="service-title">Mental Ability & Quant</div>
+        <div class="service-desc">20 questions per set on arithmetic, percentages, ratios, time & work, profit-loss, and data interpretation.</div>
+        <span class="service-price">20 Qs / Set</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="section-inner">
+    <span class="section-label">Gallery</span>
+    <h2 class="section-title">Photos & Achievements</h2>
+    <div class="section-line"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item">📸<div class="gallery-label">Classroom Session</div></div>
+      <div class="gallery-item">🎓<div class="gallery-label">Student Results</div></div>
+      <div class="gallery-item">⚖️<div class="gallery-label">Legal Workshop</div></div>
+      <div class="gallery-item">📚<div class="gallery-label">Study Material</div></div>
+      <div class="gallery-item">🏆<div class="gallery-label">Toppers 2024</div></div>
+      <div class="gallery-item">🎤<div class="gallery-label">Seminar</div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:20px;font-style:italic;">
+      📌 Upload your photos to replace the placeholders above
+    </p>
+  </div>
+</section>
+
+<!-- ===== PAYMENT ===== -->
+<section id="payment">
+  <div class="section-inner">
+    <span class="section-label">Secure Payment</span>
+    <h2 class="section-title">Get Instant Access</h2>
+    <div class="section-line"></div>
+    <div class="payment-wrap">
+      <div class="payment-card">
+        <div class="pay-title">LLB Mock Test Bundle</div>
+        <div class="pay-sub">Complete 20-Set Package · Instant Access after Payment</div>
+        <div class="pay-amount-box">
+          <div class="pay-rupee">₹100</div>
+          <div class="pay-rupee-label">One-Time · No Hidden Charges</div>
+        </div>
+        <div class="pay-methods">
+          <div class="pay-method">
+            <div class="pm-icon">📱</div>
+            <div class="pm-label">UPI / PhonePe / GPay</div>
+            <div class="pm-value">prasadtawade000-1@okicici</div>
+          </div>
+          <div class="pay-method">
+            <div class="pm-icon">📞</div>
+            <div class="pm-label">WhatsApp / Call / Paytm</div>
+            <div class="pm-value">8793233823</div>
+          </div>
+        </div>
+        <div class="pay-steps">
+          <div class="pay-steps-title">HOW TO GET ACCESS</div>
+          <div class="pay-step">
+            <div class="step-num">1</div>
+            <div class="step-text">Pay ₹100 via UPI ID <strong style="color:var(--gold)">prasadtawade000-1@okicici</strong> or send to <strong style="color:var(--gold)">8793233823</strong></div>
+          </div>
+          <div class="pay-step">
+            <div class="step-num">2</div>
+            <div class="step-text">Take a screenshot of your payment confirmation</div>
+          </div>
+          <div class="pay-step">
+            <div class="step-num">3</div>
+            <div class="step-text">Send the screenshot to Prof. Prasad Tawade on WhatsApp: <strong style="color:var(--gold)">8793233823</strong> or Email: <strong style="color:var(--gold)">ptawade7@gmail.com</strong></div>
+          </div>
+          <div class="pay-step">
+            <div class="step-num">4</div>
+            <div class="step-text">You will receive your unique Login ID & Password to access all 20 mock test sets</div>
+          </div>
+        </div>
+        <div class="pay-notice">
+          🔒 <strong>Important:</strong> Mock tests are accessible ONLY after verified payment.
+          No sharing of credentials. Content is protected — copying, downloading and screenshots are disabled inside the portal.
+        </div>
+        <a href="https://wa.me/918793233823?text=Hi%20Prof.%20Prasad%20Tawade%2C%20I%20have%20paid%20%E2%82%B9100%20for%20the%20LLB%20Mock%20Test%20Bundle.%20Please%20send%20my%20login%20details." 
+           target="_blank" class="btn-primary" style="display:block;text-align:center;width:100%;padding:14px;font-size:14px;">
+          💬 Send Payment Screenshot on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOGIN ===== -->
+<section id="login">
+  <div class="section-inner">
+    <span class="section-label">Student Portal</span>
+    <h2 class="section-title">Login to Access Tests</h2>
+    <div class="section-line"></div>
+    <div class="login-wrap">
+      <div class="login-card">
+        <div class="login-title">🔐 Student Login</div>
+        <div class="login-sub">Enter credentials received after payment verification</div>
+        <div class="login-error" id="loginError">❌ Invalid credentials. Please check your Login ID and Password.</div>
+        <div class="login-success" id="loginSuccess">✅ Login successful! Redirecting to your mock tests...</div>
+        <div class="form-group">
+          <label class="form-label">Login ID / Email</label>
+          <input type="text" class="form-input" id="loginId" placeholder="Enter your login ID">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" class="form-input" id="loginPass" placeholder="Enter your password">
+        </div>
+        <button class="login-btn" onclick="doLogin()">ACCESS MOCK TESTS →</button>
+        <div class="login-note">
+          Don't have access? <a href="#payment" style="color:var(--gold);text-decoration:none;">Pay ₹100 to get login details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Contact Prof. Prasad Tawade</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+      <div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Phone / WhatsApp</div>
+            <div class="ci-value"><a href="tel:+918793233823">8793233823</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📧</div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:ptawade7@gmail.com" style="color:var(--gold);text-decoration:none;">ptawade7@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Pune, Maharashtra, India</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">💳</div>
+          <div>
+            <div class="ci-label">UPI Payment</div>
+            <div class="ci-value">prasadtawade000-1@okicici</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="ci-icon">⏰</div>
+          <div>
+            <div class="ci-label">Available</div>
+            <div class="ci-value">Mon–Sat, 9 AM – 8 PM</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form-card">
+          <div class="cf-title">Send a Message</div>
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" id="cfName" placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="text" class="form-input" id="cfPhone" placeholder="Your phone number">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="cfEmail" placeholder="Your email address">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-input" id="cfMsg" rows="4" placeholder="Your query or message..." style="resize:vertical"></textarea>
+          </div>
+          <button class="contact-btn" onclick="sendContact()">SEND MESSAGE →</button>
+          <div class="form-success" id="cfSuccess">✅ Message sent! Prof. Prasad Tawade will contact you shortly on WhatsApp.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">⚖️ MHCET LLB MOCK TEST UNIVERSITY</div>
+  <div class="footer-text">
+    by Prof. Prasad Tawade · Pune, Maharashtra<br>
+    📞 8793233823 · ✉️ ptawade7@gmail.com
+  </div>
+  <div class="footer-copy">© 2025 MHCET LLB MOCK TEST UNIVERSITY · ALL RIGHTS RESERVED · UNAUTHORIZED COPYING PROHIBITED</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== ANTI-COPY PROTECTION =====
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if (
+    (e.ctrlKey && ['c','u','s','a','p'].includes(e.key.toLowerCase())) ||
+    e.key === 'F12' || e.key === 'PrintScreen' ||
+    (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase()))
+  ) { e.preventDefault(); return false; }
+});
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('cut', e => e.preventDefault());
+document.addEventListener('dragstart', e => e.preventDefault());
+
+// Blur on print attempt
+window.addEventListener('beforeprint', () => {
+  document.body.style.filter = 'blur(20px)';
+  setTimeout(() => document.body.style.filter = '', 2000);
+});
+
+// ===== MOBILE MENU =====
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.remove('open');
+  });
+});
+
+// ===== LOGIN =====
+// PASSWORD FORMULA:
+// Login ID  = firstname (lowercase) + last 4 digits of phone
+// Password  = llb@2026 + last 2 digits of phone
+// Example: Name=Rahul, Phone=9876543821 → ID: rahul3821 | Pass: llb@202621
+//
+// ADMIN LOGIN: prasad / admin@2026
+//
+// ➕ TO ADD A NEW STUDENT — add one line below:
+// 'firstname+last4digits': 'llb@2026+last2digits',
+const STUDENTS = {
+  // ── ADMIN ──────────────────────────────
+  'prasad': 'admin@2026',
+
+  // ── STUDENTS (add new students below) ──
+  // 'rahul3821': 'llb@202621',   ← example
+  // 'priya2109': 'llb@202609',   ← example
+  // 'amit6710': 'llb@202610',    ← example
+};
+
+// Auto-generate password from login ID
+function autoPassword(loginId) {
+  // If loginId ends with digits, extract last 2 for password
+  const match = loginId.match(/(\d{2})$/);
+  if (match) return 'llb@2026' + match[1];
+  return null;
+}
+
+function doLogin() {
+  const id = document.getElementById('loginId').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value.trim();
+  const errEl = document.getElementById('loginError');
+  const sucEl = document.getElementById('loginSuccess');
+
+  errEl.style.display = 'none';
+  sucEl.style.display = 'none';
+
+  if (!id || !pass) {
+    errEl.textContent = '⚠️ Please enter both Login ID and Password.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  // Check manual STUDENTS list first
+  let valid = false;
+  if (STUDENTS[id] && STUDENTS[id] === pass) {
+    valid = true;
+  } else {
+    // Auto-check using formula: password = llb@2026 + last 2 digits of login ID
+    const autoPwd = autoPassword(id);
+    if (autoPwd && autoPwd === pass && id.length >= 6) {
+      valid = true;
+    }
+  }
+
+  if (valid) {
+    sucEl.textContent = '✅ Login successful! Welcome to MHCET LLB Mock Test University!';
+    sucEl.style.display = 'block';
+    setTimeout(() => {
+      alert(
+        '✅ Welcome to MHCET LLB Mock Test University!\n\n' +
+        '📚 You now have access to all 20 LLB Mock Test Sets.\n\n' +
+        '👉 Please open the file:\n' +
+        'MHCET_LLB_MCQ_Practice.html\n\n' +
+        '— Prof. Prasad Tawade'
+      );
+    }, 1000);
+  } else {
+    errEl.textContent = '❌ Invalid Login ID or Password. Please pay ₹100 to get access.';
+    errEl.style.display = 'block';
+  }
+}
+
+// Allow login on Enter key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    const active = document.activeElement;
+    if (active && (active.id === 'loginId' || active.id === 'loginPass')) doLogin();
+  }
+});
+
+// ===== CONTACT FORM =====
+function sendContact() {
+  const name = document.getElementById('cfName').value.trim();
+  const phone = document.getElementById('cfPhone').value.trim();
+  const email = document.getElementById('cfEmail').value.trim();
+  const msg = document.getElementById('cfMsg').value.trim();
+
+  if (!name || !phone || !msg) {
+    alert('Please fill in your Name, Phone and Message.');
+    return;
+  }
+
+  const waMsg = encodeURIComponent(
+    `📩 New Enquiry from Website\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\n\nMessage:\n${msg}`
+  );
+  window.open(`https://wa.me/918793233823?text=${waMsg}`, '_blank');
+
+  document.getElementById('cfSuccess').style.display = 'block';
+  document.getElementById('cfName').value = '';
+  document.getElementById('cfPhone').value = '';
+  document.getElementById('cfEmail').value = '';
+  document
