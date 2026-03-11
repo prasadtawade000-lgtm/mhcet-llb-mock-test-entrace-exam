@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prasadtawade000-lgtm.github.io/mhcet-llb-mock-test-entrace-exam/sitemap.xml
